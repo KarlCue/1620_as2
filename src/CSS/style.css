@@ -134,3 +134,22 @@ footer p {
   color: var(--text);
   font-size: var(--lrg-txt);
 }
+
+#story {
+  font-size: 3rem;
+  letter-spacing: 1px;
+  padding: 10px;
+  max-width: 100%;
+  line-height: 1.5;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px #999;
+}
+
+.saveButton{
+  font-size: 16px;
+}
+
+.deleteButton{
+  font-size: 16px;
+}
