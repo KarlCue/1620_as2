@@ -6,13 +6,11 @@ const notes = [
   }
 ]
 
-const addTextBtn = document.querySelector('.create-note-area')
-const saveTextBtn = document.querySelector('.saveButton')
-const deleteTextBtn = document.querySelector('.deleteButton')
+//Add Text
+const addTextBtn = document.querySelector('.icons')
 
-
-newText = `         </div>
-<div id="buttons">
+newText = ` 
+<div id="text">
     <textarea id="story" title="story"
     rows="5" cols="40" placeholder="Enter Text Here"></textarea>
 <div id="optionbutton">
@@ -23,6 +21,22 @@ newText = `         </div>
 function addNewText(){
   const newTextArea = document.querySelector(".write-note-area")
   newTextArea.insertAdjacentHTML('afterbegin', newText)
+  addTextBtn.removeEventListener('click',addNewText)
+
+    //Delete Text
+
+    const deleteTextBtn = document.querySelector('.deleteButton')
+
+    function deleteText(){
+      const Texts = document.querySelector(".write-note-area");
+      while (Texts.hasChildNodes()) {
+        Texts.removeChild(Texts.firstChild);
+      }
+      addTextBtn.addEventListener('click',addNewText)
+    }
+  
+    deleteTextBtn.addEventListener('click', deleteText)
 }
 
 addTextBtn.addEventListener('click',addNewText)
+
