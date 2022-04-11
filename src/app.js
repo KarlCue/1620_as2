@@ -40,37 +40,60 @@ function addNewText(){
     //Save Text
 
     const saveTextBtn = document.querySelector('.saveButton')
+    const noteDisplayArea = document.querySelector('.notes-list')
 
-    function newPad(noteBody){
-      const titles = noteBody.split('\n')[0]
-      const body = noteBody.split('\n')[1]
-      test = {title:titles,noteBody:body,id:2}
-      notes.push(test)
-      template = ` <ul>${titles}</ul>`
-      console.log(notes)
-      return template
-    }
-
-    function displayPad(note){
-      const noteDisplayArea = document.querySelector('.notes-list')
-      noteDisplayArea.insertAdjacentHTML('afterbegin', note)
-    }
-
-    function takeNote(){
+    function newPad(){
       const notePad = document.querySelector('#story')
-      const note = notePad.value
-      return note
+      const titles = notePad.value.split('\n')[0]
+      notes.push({title:titles ,noteBody:notePad.value, id:notes.length + 1})
+      template = ` <li>${titles}</li>`
+      noteDisplayArea.insertAdjacentHTML('beforeend',template)
+      console.log(notes)
     }
 
     function assemblePad(){
-      const noteText = takeNote()
-      const note = newPad(noteText)
-      displayPad(note)
+      newPad()
       deleteText()
     }
 
     saveTextBtn.addEventListener('click',assemblePad)
 
-}
+    //Click on Side Nav
+    const readNote = document.querySelector('.read-note-area')
+    
+    function displayText(event){
+      content = event.target.innerText
+      console.log(content)
+      //console.log(event.target.localName)
+      //  console.log(event.target.parentNode.outerText)
+      //  }
+
+      
+      for(const note of notes){
+        if (note.title == content)
+       content = note.noteBody
+      }
+      
+      readNoteTemplate = ` 
+        <div class="text">
+            <p>${content}</p>
+        <div id="optionbutton">
+            <button class="deleteReadBtn">delete</button>
+        </div>  `
+      readNote.insertAdjacentHTML('afterbegin',readNoteTemplate)
+
+      //Delete the read text
+      const deleteReadBtn = document.querySelector('.deleteReadBtn')     
+      function deleteReadText(){
+        while (readNote.hasChildNodes()) {
+          readNote.removeChild(readNote.firstChild);
+        }
+      }
+      deleteReadBtn.addEventListener('click',deleteReadText)
+    }
+    
+    noteDisplayArea.addEventListener('click',displayText)
+
+  }
 addTextBtn.addEventListener('click',addNewText)
 
