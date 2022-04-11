@@ -70,13 +70,16 @@ function displayText(event) {
   }
 
   for (const note of notes) {
-    if (note.title == content) content = note.noteBody;
+    if (note.title == content) 
+    content = note.noteBody;
+    title2 = note.title;
   }
 
   readNoteTemplate = ` 
     <div id="options">
         <button class="deleteReadBtn">x</button>
     <div class="text">
+        <h1>${title2}</h1>
         <p>${content}</p>
     </div>  `;
   readNote.insertAdjacentHTML("afterbegin", readNoteTemplate);
